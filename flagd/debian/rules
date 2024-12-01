@@ -7,36 +7,27 @@
 # This special exception was added by Craig Small in version 0.37 of dh-make.
 
 # Uncomment this to turn on verbose mode.
-export DH_VERBOSE=1
+#export DH_VERBOSE=1
 
 
-#DEST=$$(pwd)/debian/@NAME@
-
-export HOME=/build
-#export GOROOT=$(shell realpath ./)/deps
-#export GOCACHE=$(shell realpath ./)/cache
-#export DH_GOPKG=flagd
+# Stuff to allow go to download dependencies
 export GOPROXY=proxy.golang.org
 export GOSUMDB=sum.golang.org
 export GO111MODULE=on
 
-
+# Dubious, but I'm lazy
 DEST=$$(pwd)/debian/@NAME@
-
-#override_dh_auto_build:
-#	make build
-#	dh build --buildsystem=golang --with=golang --builddirectory=flagd
+# also Dubious, but easier than managing GOPATH/GOROOT/etc
+ifeq ($(HOME),/nonexistent)
+export HOME=/build
+endif
 
 %:
 	dh $@ 
 
 override_dh_auto_build:
 	make workspace-init
-	go build -ldflags "-X main.version=@VERSION@ -X main.commit=@VERSION@ -X main.date=2024-12-01T18:38:07Z" -o ./bin/flagd ./flagd
-
-override_dh_auto_clean:
-
-override_dh_auto_test:
+	go build -ldflags "-X main.version=@VERSION@ -X main.commit=@VERSION@ -X main.date=1970-01-00T00:01:00Z" -o ./bin/flagd ./flagd
 
 override_dh_auto_install:
 	mkdir -p $(DEST)/usr/bin

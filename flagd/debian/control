@@ -13,7 +13,7 @@ Homepage: @URL@
 X-Python-Version: >= 2.5
 
 Package: @NAME@
-Architecture: all
+Architecture: any
 Depends: ${misc:Depends}
 Description: @SUMMARY@ 
  @DESCRIPTION@ 

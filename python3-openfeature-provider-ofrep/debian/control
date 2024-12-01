@@ -9,7 +9,6 @@ Build-Depends:
  python3-hatchling,
  python3-setuptools,
  pybuild-plugin-pyproject,
- python3-ruff,
  python3-pytest
 Standards-Version: 3.8.4
 Homepage: @URL@ 

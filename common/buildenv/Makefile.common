@@ -159,15 +159,15 @@ $(DEB_CONTROL_RULE_COPYRIGHT): $(DEB_CONTROL_IN) $(DEB_RULE_IN) $(DEB_COPYRIGHT_
 	else\
 	    cp -r $$f $@;\
 	fi
-	sed -i 's|@NAME@|$(PKGNAME)|'            $@ || (rm -f $@ ; exit 1)
-	sed -i 's|@VERSION@|$(VERSION)|'         $@ || (rm -f $@ ; exit 1)
-	sed -i 's|@LICENSE@|$(LICENSE)|'         $@ || (rm -f $@ ; exit 1)
-	sed -i 's|@RELEASE@|$(RELEASE)|'         $@ || (rm -f $@ ; exit 1)
-	sed -i 's|@DESCRIPTION@|$(DESCRIPTION)|' $@ || (rm -f $@ ; exit 1)
-	sed -i 's|@SUMMARY@|$(SUMMARY)|'         $@ || (rm -f $@ ; exit 1)
-	sed -i 's|@URL@|$(URL)|'                 $@ || (rm -f $@ ; exit 1)
-	sed -i 's|@MAINTAINER@|$(MAINTAINER)|'   $@ || (rm -f $@ ; exit 1)
-	sed -i 's|@MAINTAINER_EMAIL@|$(MAINTAINER_EMAIL)|' \
+	sed -i 's|@NAME@|$(PKGNAME)|g'            $@ || (rm -f $@ ; exit 1)
+	sed -i 's|@VERSION@|$(VERSION)|g'         $@ || (rm -f $@ ; exit 1)
+	sed -i 's|@LICENSE@|$(LICENSE)|g'         $@ || (rm -f $@ ; exit 1)
+	sed -i 's|@RELEASE@|$(RELEASE)|g'         $@ || (rm -f $@ ; exit 1)
+	sed -i 's|@DESCRIPTION@|$(DESCRIPTION)|g' $@ || (rm -f $@ ; exit 1)
+	sed -i 's|@SUMMARY@|$(SUMMARY)|g'         $@ || (rm -f $@ ; exit 1)
+	sed -i 's|@URL@|$(URL)|g'                 $@ || (rm -f $@ ; exit 1)
+	sed -i 's|@MAINTAINER@|$(MAINTAINER)|g'   $@ || (rm -f $@ ; exit 1)
+	sed -i 's|@MAINTAINER_EMAIL@|$(MAINTAINER_EMAIL)|g' \
 	    $@ || (rm -f $@ ; exit 1)
 
 # Generate generic changelog
@@ -230,6 +230,7 @@ $(BUILD_DIR)/pkg_built_chroot.deb.$(DIST): $(DEB_PREPARE) | $(DIRECTORIES) $(IND
 	  	$(BUILD_DIR)/deb.$(DIST)/*.dsc  \
 	  	--basepath $(COW_DIR)/$(COW_NAME) \
 	  	--buildresult $(OUT_DIR)/ $(OTHERMIRROR) \
+		--use-network yes \
 	  	--mirror $(DEB_MIRROR) $(BINDMOUNT); \
 	if [ $$? -ne 0 ];\
 		then touch $(BUILD_DIR)/failure.chroot.$(DIST);exit 1;\
@@ -333,15 +334,15 @@ $(RPM_CONTENT_OUT): $(RPM_CONTENT_IN) $(RPM_SPEC)
 $(RPM_SPEC): $(RPM_SPEC_IN) Makefile
 	mkdir -p $(BUILD_DIR)/rpm.$(DIST)/SPEC
 	cp $(RPM_SPEC_IN) $(RPM_SPEC)
-	sed -i 's|@NAME@|$(PKGNAME)|'            $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
-	sed -i 's|@LICENSE@|$(LICENSE)|'         $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
-	sed -i 's|@VERSION@|$(VERSION)|'         $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
-	sed -i 's|@RELEASE@|$(RELEASE)|'         $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
-	sed -i 's|@DESCRIPTION@|$(DESCRIPTION)|' $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
-	sed -i 's|@SUMMARY@|$(SUMMARY)|'         $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
-	sed -i 's|@URL@|$(URL)|'                 $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
-	sed -i 's|@MAINTAINER@|$(MAINTAINER)|'   $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
-	sed -i 's|@MAINTAINER_EMAIL@|$(MAINTAINER_EMAIL)|' \
+	sed -i 's|@NAME@|$(PKGNAME)|g'            $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
+	sed -i 's|@LICENSE@|$(LICENSE)|g'         $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
+	sed -i 's|@VERSION@|$(VERSION)|g'         $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
+	sed -i 's|@RELEASE@|$(RELEASE)|g'         $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
+	sed -i 's|@DESCRIPTION@|$(DESCRIPTION)|g' $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
+	sed -i 's|@SUMMARY@|$(SUMMARY)|g'         $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
+	sed -i 's|@URL@|$(URL)|g'                 $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
+	sed -i 's|@MAINTAINER@|$(MAINTAINER)|g'   $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
+	sed -i 's|@MAINTAINER_EMAIL@|$(MAINTAINER_EMAIL)|g' \
 	    $(RPM_SPEC) || (rm -f $(RPM_SPEC); exit 1)
 
 

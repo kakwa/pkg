@@ -17,6 +17,7 @@ export GO111MODULE=on
 
 # Dubious, but I'm lazy
 DEST=$$(pwd)/debian/@NAME@
+
 # also Dubious, but easier than managing GOPATH/GOROOT/etc
 ifeq ($(HOME),/nonexistent)
 export HOME=/build
